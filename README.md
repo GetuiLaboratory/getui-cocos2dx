@@ -3,6 +3,7 @@
 个推官方提供的 Cocos2d-x插件 （目前仅支持Android，iOS版本近期将会发布）。
 
 ## Android Studio 自动集成
+
 目前自动集成的方式仅支持Android Studio
 
 - 将`getui-cocos2dx`文件夹放置于 `YourProjectName/cocos2d/plugin/glugins/` 目录下
