@@ -50,13 +50,13 @@
 	
 	```
 
--  添加GeTui SDK gradle依赖，在`/YourProjectName/proj.android-studio/app/build.gradle`中添加`compile 'com.getui:sdk:2.10.2.0'`
+-  添加GeTui SDK gradle依赖，在`/YourProjectName/proj.android-studio/app/build.gradle`中添加`compile 'com.getui:sdk-for-google-play:2.10.3.5'`
 
    ```
    dependencies {
     	compile fileTree(dir: 'libs', include: ['*.jar'])
     	compile project(':libcocos2dx')
-    	compile 'com.getui:sdk:2.10.2.0'
+    	compile 'com.getui:sdk-for-google-play:2.10.3.5'
 	}
 	
    ```

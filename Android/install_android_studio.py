@@ -282,7 +282,7 @@ def write_code_to_gradle():
         for line in lines:
             i += 1
             if line.find("dependencies {") >= 0:
-                lines.insert(i, "    compile 'com.getui:sdk:2.10.2.0'\n")
+                lines.insert(i, "    compile 'com.getui:sdk-for-google-play:2.10.3.5'\n")
                 break
 
     app_build_gradle_file = file(app_build_gradle_target, "w")
