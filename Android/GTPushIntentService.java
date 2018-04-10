@@ -1,10 +1,10 @@
 package org.cocos2dx.cpp.getui;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.message.GTCmdMessage;
+import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 
 import org.json.JSONException;
@@ -20,9 +20,6 @@ import org.json.JSONObject;
  */
 
 public class GTPushIntentService extends GTIntentService {
-
-
-
 
     @Override
     public void onReceiveServicePid(Context context, int pid) {
@@ -60,6 +57,36 @@ public class GTPushIntentService extends GTIntentService {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("action", cmdMessage.getAction());
             GTPushHelper.onReceiveCommandResult(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //通知到达
+    @Override
+    public void onNotificationMessageArrived(Context context, GTNotificationMessage msg) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("messageId",msg.getMessageId());
+            jsonObject.put("taskId",msg.getTaskId());
+            jsonObject.put("title",msg.getTitle());
+            jsonObject.put("content",msg.getContent());
+            GTPushHelper.onNotificationMessageArrived(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //点击回调
+    @Override
+    public void onNotificationMessageClicked(Context context, GTNotificationMessage msg) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("messageId",msg.getMessageId());
+            jsonObject.put("taskId",msg.getTaskId());
+            jsonObject.put("title",msg.getTitle());
+            jsonObject.put("content",msg.getContent());
+            GTPushHelper.onNotificationMessageClicked(jsonObject.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

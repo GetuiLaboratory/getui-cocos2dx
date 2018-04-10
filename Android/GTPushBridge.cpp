@@ -23,7 +23,7 @@ extern "C"{
 #define COUNTOF(x) (sizeof((x)) / sizeof(x)[0])
 
 
-const char* kGTPushHelperClassName = "org/cocos2dx/cpp/getui/GTPushHelper";
+const char* kGTPushHelperClassName = "org/cocos2dx/cpp/org.cocos2dx.org.cocos2dx.cpp.getui/GTPushHelper";
 
 jobject getContext(){
   JniMethodInfo t;
@@ -210,6 +210,8 @@ GTReceiveClientId_callback g_clientId_callback = NULL;
 GTReceiveMessageData_callback g_messageData_callback = NULL;
 GTReceiveOnlineState g_onlineState_callback = NULL;
 GTReceiveCommandResult g_commandResult_callback = NULL;
+GTReceiveNotificationArrived_callback g_notificationArrived_callback = NULL;
+GTReceiveNotificationClicked_callback g_notificationClicked_callback = NULL;
 void * notificationHandler = NULL;
 
 void GTPushBridge::registerNotificationCallback(void *p_handle,
@@ -217,13 +219,17 @@ void GTPushBridge::registerNotificationCallback(void *p_handle,
     GTReceiveClientId_callback clientId_callback,
     GTReceiveMessageData_callback messageData_callback,
     GTReceiveOnlineState onlineState_callback,
-    GTReceiveCommandResult commandResult_callback){
+    GTReceiveCommandResult commandResult_callback,
+    GTReceiveNotificationArrived_callback notificationArrived_callback,
+    GTReceiveNotificationArrived_callback notificationClicked_callback){
 
       g_pid_callback = pid_callback;
       g_clientId_callback = clientId_callback;
       g_messageData_callback = messageData_callback;
       g_onlineState_callback = onlineState_callback;
       g_commandResult_callback = commandResult_callback;
+      g_notificationArrived_callback = notificationArrived_callback;
+      g_notificationClicked_callback = notificationClicked_callback;
       notificationHandler = p_handle;
 
 }
@@ -247,13 +253,42 @@ JNIEXPORT void JNICALL  Java_org_cocos2dx_cpp_getui_GTPushHelper_onReceiveClient
 }
 
 JNIEXPORT void JNICALL Java_org_cocos2dx_cpp_getui_GTPushHelper_onReceiveMessageData__Ljava_lang_String_2(JNIEnv *env, jclass, jstring message){
-  const char * notification = NULL;
+    const char * notification = NULL;
     if(message != NULL){
         notification = env->GetStringUTFChars(message, JNI_FALSE);
         CCLOG("GeTui onReceiveMessageData, message = %s", notification);
     }
     if(g_messageData_callback != NULL){
         g_messageData_callback(notificationHandler, notification);
+    }
+    if(message != NULL){
+        env->ReleaseStringUTFChars(message, notification);
+    }
+}
+
+JNIEXPORT void Java_org_cocos2dx_cpp_getui_GTPushHelper_onNotificationMessageArrived__Ljava_lang_String_2(JNIEnv *env, jclass, jstring message){
+    const char * notification = NULL;
+    if (message != NULL) {
+        notification = env->GetStringUTFChars(message,JNI_FALSE);
+        CCLOG("GeTui onNotificationArrived, message = %s", notification);
+    }
+    if(g_notificationArrived_callback != NULL){
+        g_notificationArrived_callback(notificationHandler, notification);
+    }
+    if(message != NULL){
+        env->ReleaseStringUTFChars(message, notification);
+    }
+
+}
+
+JNIEXPORT void Java_org_cocos2dx_cpp_getui_GTPushHelper_onNotificationMessageClicked__Ljava_lang_String_2(JNIEnv *env, jclass, jstring message){
+    const char * notification = NULL;
+    if (message != NULL) {
+        notification = env->GetStringUTFChars(message,JNI_FALSE);
+        CCLOG("GeTui onNotificationClicked, message = %s", notification);
+    }
+    if(g_notificationClicked_callback != NULL){
+        g_notificationClicked_callback(notificationHandler, notification);
     }
     if(message != NULL){
         env->ReleaseStringUTFChars(message, notification);
@@ -274,7 +309,7 @@ JNIEXPORT void JNICALL Java_org_cocos2dx_cpp_getui_GTPushHelper_onReceiveCommand
         notification = env->GetStringUTFChars(message, JNI_FALSE);
         CCLOG("GeTui onReceiveCommandResult, message = %s", notification );
     }
-    if(g_commandResult_callback!=NULL){
+    if(g_commandResult_callback != NULL){
         g_commandResult_callback(notificationHandler, notification);
     }
     if(message != NULL){

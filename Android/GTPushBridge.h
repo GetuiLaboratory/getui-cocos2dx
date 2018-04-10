@@ -12,8 +12,11 @@ using namespace std;
 typedef void (*GTReceiveServicePid_callback)(void *p_handle, int pid);
 typedef void (*GTReceiveClientId_callback)(void *p_handle, const char* clientId);
 typedef void (*GTReceiveMessageData_callback)(void *p_handle, const char* message);
+typedef void (*GTReceiveNotificationArrived_callback)(void *p_handle, const char* message);
+typedef void (*GTReceiveNotificationClicked_callback)(void *p_handle, const char* message);
 typedef void (*GTReceiveOnlineState)(void *p_handle,  bool online);
 typedef void (*GTReceiveCommandResult)(void *p_handle, const char* message);
+
 
 #endif
 
@@ -103,8 +106,10 @@ class GTPushBridge {
     GTReceiveClientId_callback clientId_callback,
     GTReceiveMessageData_callback messageData_callback,
     GTReceiveOnlineState onlineState_callback,
-    GTReceiveCommandResult commandResult_callback
-  );
+    GTReceiveCommandResult commandResult_callback,
+    GTReceiveNotificationArrived_callback notificationArrived_callback,
+    GTReceiveNotificationClicked_callback notificationClickedCallback
+    );
 
   #endif
 

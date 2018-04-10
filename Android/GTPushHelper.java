@@ -1,7 +1,6 @@
 package org.cocos2dx.cpp.getui;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 
 import com.igexin.sdk.PushManager;
 import com.igexin.sdk.Tag;
@@ -24,6 +23,10 @@ public class GTPushHelper {
     public static native void onReceiveOnlineState(boolean online);
 
     public static native void onReceiveCommandResult(String message);
+
+    public static native void onNotificationMessageArrived(String message);
+
+    public static native void onNotificationMessageClicked(String message);
 
     public static void init(Context context){
         mContext = context;
