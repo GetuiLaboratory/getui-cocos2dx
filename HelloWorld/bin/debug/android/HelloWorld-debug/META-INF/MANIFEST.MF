@@ -1,0 +1,76 @@
+Manifest-Version: 1.0
+Built-By: Generated-by-ADT
+Created-By: Android Gradle 2.3.3
+
+Name: res/mipmap-mdpi-v4/ic_launcher.png
+SHA1-Digest: yedFRgdQGr+b3AAJnJaduAw5q5Y=
+
+Name: lib/x86/libgetuiext2.so
+SHA1-Digest: M4v/sZ7ZMnVnQ2oGs/KMAsHCD10=
+
+Name: AndroidManifest.xml
+SHA1-Digest: XHr3ypCIgIJ0byIBX6biU9HhqUQ=
+
+Name: lib/mips64/libgetuiext2.so
+SHA1-Digest: LWowUu+VHSI7wXgPGNom4E843eU=
+
+Name: assets/fonts/Marker Felt.ttf
+SHA1-Digest: Ul8qSkVFD87LPYpf1H07D0hPYps=
+
+Name: res/mipmap-xhdpi-v4/ic_launcher.png
+SHA1-Digest: J1HKHfp0DLl3wpal2Jwgh3vHGxU=
+
+Name: assets/HelloWorld.png
+SHA1-Digest: a0GemI6mthLNUAd/5U4Rt7yWPyw=
+
+Name: assets/CloseSelected.png
+SHA1-Digest: 6v4dJpoqKwMLK+3S6WDrFXXLi/4=
+
+Name: assets/getui_popup_close.png
+SHA1-Digest: 3PxcPZ1vRVg/shO9Q8m4kCl+++0=
+
+Name: assets/fonts/arial.ttf
+SHA1-Digest: foaJFK5WjLI88v0kWt2jmW0DL70=
+
+Name: res/mipmap-hdpi-v4/ic_launcher.png
+SHA1-Digest: khi4MRA8hemSGjaXV9bmZ6L+RYw=
+
+Name: res/layout/getui_notification.xml
+SHA1-Digest: cQb4k5FhWQAt4xW7tg9CbwpB89c=
+
+Name: lib/x86_64/libgetuiext2.so
+SHA1-Digest: 2ndRYUzzt5As3UMulKdIC4sWrNw=
+
+Name: assets/CloseNormal.png
+SHA1-Digest: AgvYcAvuKoIlb0OwTbPsRZiXFOU=
+
+Name: lib/armeabi/libMyGame.so
+SHA1-Digest: Nk/31UPU4pI3blCvt0VXQnhIx+M=
+
+Name: lib/mips/libgetuiext2.so
+SHA1-Digest: HOuAOTFmUa9mAKXnoMgiAlgOEr8=
+
+Name: lib/armeabi-v7a/libgetuiext2.so
+SHA1-Digest: rl2ODMjsEMwy++uX49okSTpkH7w=
+
+Name: lib/armeabi/libgetuiext2.so
+SHA1-Digest: y+A2CWWAZTMNVkNt7xltJOMIIYY=
+
+Name: lib/arm64-v8a/libgetuiext2.so
+SHA1-Digest: 8f4Qj3coJnZ8gBmLz6g8gGyJJPE=
+
+Name: assets/getui_popup_bg.9.png
+SHA1-Digest: 0i2ug9zD61+mUJM+VRU0su+rZBA=
+
+Name: resources.arsc
+SHA1-Digest: 618+WVqlx6OQ/cLGHj8bpQf24wQ=
+
+Name: classes.dex
+SHA1-Digest: PCtWxi/INxnH2XuRHWejIP1t1Io=
+
+Name: res/raw/keep.xml
+SHA1-Digest: FFWtYCym0cVc68yQLgjHLteriq0=
+
+Name: res/mipmap-xxhdpi-v4/ic_launcher.png
+SHA1-Digest: WzuqGg1LPd317CREzHYAAAT1zgE=
+
