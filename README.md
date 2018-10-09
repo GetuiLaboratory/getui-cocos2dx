@@ -4,6 +4,8 @@
 
 ## Android Studio 自动集成
 
+目前最新版本jar包为4.3.2.0, 已更新至libso3
+
 目前自动集成的方式仅支持Android Studio
 
 - 将`getui-cocos2dx`文件夹放置于 `YourProjectName/cocos2d/plugin/glugins/` 目录下
