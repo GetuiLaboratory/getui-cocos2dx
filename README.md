@@ -4,7 +4,7 @@
 
 ## Android Studio 自动集成
 
-目前最新版本jar包为4.3.2.0, 已更新至libso3
+目前最新版本jar包为4.3.5.9, 已更新至libso3
 
 目前自动集成的方式仅支持Android Studio
 
@@ -58,7 +58,7 @@
    dependencies {
     	compile fileTree(dir: 'libs', include: ['*.jar'])
     	compile project(':libcocos2dx')
-    	compile 'com.getui:sdk-for-google-play:2.10.3.5'
+    	compile 'com.getui:sdk-for-google-play:4.3.5.9'
 	}
 	
    ```
