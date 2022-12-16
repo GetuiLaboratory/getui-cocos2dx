@@ -1,2 +1,7 @@
 .DS_Store
 .idea
+/HelloWorld/proj.ios_mac/pods/*
+/HelloWorld/proj.ios_mac/Podfile.lock
+/HelloWorld/proj.ios_mac/HelloWorld.xcworkspace/*
+/HelloWorld/proj.ios_mac/HelloWorld.xcodeproj/xcuserdata/*
+/HelloWorld/proj.ios_mac/HelloWorld.xcodeproj/project.xcworkspace/xcuserdata/*

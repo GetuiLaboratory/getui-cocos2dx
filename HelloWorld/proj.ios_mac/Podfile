@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'HelloWorld-mobile' do
+
+	platform :ios, "8.0"
+
+   	pod 'GTSDK'
+
+end
+

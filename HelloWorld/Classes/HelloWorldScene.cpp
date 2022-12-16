@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "GTPushBridge.h"
 
 USING_NS_CC;
 
@@ -14,6 +15,11 @@ static void problemLoading(const char* filename)
     printf("Error while loading: %s\n", filename);
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
+
+static void gtClientCallBack(const char* clientId) {
+    printf("GTSDK clientId: %s\n", clientId);
+}
+
 
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
@@ -91,6 +97,11 @@ bool HelloWorld::init()
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    GTPushBridge::registerNotificationCallback(gtClientCallBack, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+#endif
+    
     return true;
 }
 

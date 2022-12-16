@@ -27,6 +27,11 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "GTPushOCBridge.h"
+// GTSDK 配置信息
+#define kGtAppId @"xXmjbbab3b5F1m7wAYZoG2"
+#define kGtAppKey @"BZF4dANEYr8dwLhj6lRfx2"
+#define kGtAppSecret @"yXRS5zRxDt8WhMW8DD8W05"
 
 @implementation AppController
 
@@ -78,7 +83,10 @@ static AppDelegate s_sharedApplication;
     
     //run the cocos2d-x game scene
     app->run();
-
+    
+    [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:[GTPushOCBridge sharedInstance] launchingOptions:launchOptions];
+    
+    [GeTuiSdk registerRemoteNotification: (UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge)];
     return YES;
 }
 

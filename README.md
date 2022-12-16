@@ -1,6 +1,6 @@
 # getui-cocos2dx
 
-个推官方提供的 Cocos2d-x插件 （目前仅支持Android，iOS版本近期将会发布）。
+个推官方提供的 Cocos2d-x插件 
 
 ## Android Studio 自动集成
 
@@ -206,3 +206,176 @@
 	}
 	
   ```
+
+## iOS Xcode 集成
+
+可参照HelloWorld目录下工程进行集成
+
+目前iOS版本采用手动集成，其中GTSDK推荐使用cocoapos集成；
+
+如需要手动集成,请参照官方集成指南： [iOS SDK 集成指南](https://docs.getui.com/getui/mobile/ios/xcode/)
+
+#### 集成步骤
+
+* 使用 Cocos2d-x 生成 iOS 工程
+
+* 在.xcodeproj文件同目录下，新建Podfile文件，可参照插件目录`iOS`下Podfile文件
+
+* 使用 `pod install` 安装GTSDK依赖
+
+* 将插件目录`iOS`下，`GTPushBridge.h`、`GTPushOCBridge.h`、`GTPushBridge.mm`三个文件拖入xcode工程
+
+* 如果运行过程中显示swift依赖文件，建议新建一个swift文件
+
+* 开启工程推送权限：在buildSetting下Signing&Capabilities下加入Push Notifications权限
+
+#### 添加代码
+
+* 从个推官网获取appid、appkey及appSecret
+
+* 在xcode工程中找到iOS的‘AppController.mm’文件
+
+* 在‘AppController.mm’文件头部加入代码：
+
+  ```
+  #import "GTPushOCBridge.h" //引入SDK回调承接类
+  // GTSDK 配置信息
+  #define kGtAppId @"您的AppId"
+  #define kGtAppKey @"您的AppKey"
+  #define kGtAppSecret @"您的AppSecret"
+  ```
+
+* 在 `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` 方法中加入GTSDK启动方法,建议写在方法末尾 
+
+  ```
+  //承接类一定要使用[GTPushOCBridge sharedInstance]
+  [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:[GTPushOCBridge sharedInstance] launchingOptions:launchOptions];
+  //注册通知类型 参考代码 可根据需求修改
+  [GeTuiSdk registerRemoteNotification: (UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge)];
+  
+  ```
+  
+* 在cocos2dx代码中使用推送桥接类
+  
+  ```
+  #include "GTPushBridge.h" //引入桥接类
+  ```
+  ```
+  //回调函数
+  static void gtClientCallBack(const char* clientId) {
+    printf("GTSDK clientId: %s\n", clientId);
+  }
+  ```
+  ```
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    //注册回调函数
+    GTPushBridge::registerNotificationCallback(gtClientCallBack, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+    #endif
+  ```
+  如果成功在控制台输出clientId，则完成了集成；
+
+
+## iOS Usage
+
+iOS提供的方法如下，如有需要，可参考下述方法自行增删方法
+
+
+    ```
+     //获取个推版本号
+    static const char* getVersion();
+
+    //获取clientId
+    static const char* getClientId();
+
+    //获取运行状态 0正在启动 1启动、在线 2停止 3离线
+    static int getStatus();
+
+    /**
+     *  设置关闭推送模式（默认值：NO）
+     *  需要SDK在线才能调用
+     *
+     *  @param isValue 消息推送开发，YES.关闭消息推送 NO.开启消息推送
+     *
+     *  SDK-1.2.1+
+     *
+     */
+    static void setPushModeForOff(bool isValue);
+
+    //销毁SDK，并且释放资源
+    static void destroy();
+
+    /**
+    *  给用户打标签, 后台可以根据标签进行推送
+    *
+    *  @param tags 别名数组
+    *  tag: 只能包含中文字符、英文字母、0-9、+-*_.的组合（不支持空格）
+    *  @param aSn  绑定序列码, 不为nil
+    *  @return 提交结果，YES表示尝试提交成功，NO表示尝试提交失败
+    */
+    static bool setTags(vector<string> tags, const char* sn);
+
+    /**
+     *  同步角标值到个推服务器
+     *  该方法只是同步角标值到个推服务器，本地仍须调用setApplicationIconBadgeNumber函数
+     *
+     *  SDK-1.4.0+
+     *
+     *  @param badge 角标数值
+     */
+    static void setBadge(int badge);
+
+    /**
+     *  复位角标，等同于"setBadge:0"
+     *
+     *  SDK-1.4.0+
+     *
+     */
+    static void resetBadge();
+    
+    /**
+     *  上行第三方自定义回执actionid
+     *
+     *  @param actionId 用户自定义的actionid，int类型，取值90001-90999。
+     *  @param taskId   下发任务的任务ID
+     *  @param msgId    下发任务的消息ID
+     *
+     *  @return BOOL，YES表示尝试提交成功，NO表示尝试提交失败。注：该结果不代表服务器收到该条数据
+     *  该方法需要在回调方法“GeTuiSdkDidReceivePayload:andTaskId:andMessageId:andOffLine:fromApplication:”使用
+     */
+    static bool sendFeedbackMessage(const char* taskId, const char* messageId, int actionId);
+    
+    
+
+    /**
+     *  绑定别名功能:后台可以根据别名进行推送
+     *  需要SDK在线才能调用
+     *
+     *  @param alias 别名字符串
+     *  @param aSn   绑定序列码, 不为nil
+     */
+    static void bindAlias(const char* alias, const char* aSn);
+
+    /**
+     *  取消绑定别名功能
+     *  需要SDK在线才能调用
+     *
+     *  @param alias   别名字符串
+     *  @param aSn     绑定序列码, 不为nil
+     *  @param isSelf  是否只对当前cid有效，如果是true，只对当前cid做解绑；如果是false，对所有绑定该别名的cid列表做解绑
+     */
+    static void unBindAlias(const char* alias, const char* aSn, bool isSelf);
+
+    //注册回调
+    static void registerNotificationCallback(
+        GeTuiSdkDidRegisterClient_callback clientCallBack,
+        GeTuiSDkDidNotifySdkState_callback stateCallback,
+        GeTuiSdkWillPresentNotification_callback willPresentCallback,
+        GeTuiSdkDidReceiveNotification_callback didReceiveNotiCallback,
+        GeTuiSdkDidReceiveSlience_callback didReceiveSlienceCallBack,
+        GeTuiSdkDidSendMessage_callback didSendMessageCallback,
+        GeTuiSdkDidSetPushMode_callback didSetPushModeCallback,
+        GeTuiSdkDidAliasAction_callback aliasActionCallback,
+        GeTuiSdkDidSetTagsAction_callback tagsActionCallback,
+        GetuiSdkDidQueryTag_callback queryTagCallback
+    );
+    ```
