@@ -4,7 +4,7 @@
 
 ## Android Studio 自动集成
 
-目前最新版本jar包为4.3.5.9, 已更新至libso3
+目前个推SDK最新版本jar包为3.2.15.0,
 
 目前自动集成的方式仅支持Android Studio
 
@@ -45,7 +45,7 @@
     	repositories {
         	jcenter()
         	maven {
-            	url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/"
+            	url "https://mvn.getui.com/nexus/content/repositories/releases/"
         	}
     	}
 	}
@@ -58,7 +58,8 @@
    dependencies {
     	compile fileTree(dir: 'libs', include: ['*.jar'])
     	compile project(':libcocos2dx')
-    	compile 'com.getui:sdk-for-google-play:4.3.5.9'
+    	compile 'com.getui:gtsdk:3.2.15.0'  //个推SDK
+    	compile 'com.getui.gtcp:3.1.7.0'    //个推核心组件
 	}
 	
    ```

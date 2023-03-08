@@ -62,7 +62,7 @@ public class GTPushHelper {
     }
 
     public static void stopService(){
-        PushManager.getInstance().stopService(mContext);
+        // PushManager.getInstance().stopService(mContext);
     }
 
     public static int setTag(String[] tagNames, String sn){
